@@ -1,14 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import DisplayContainer from './components/DisplayContainer';
+import ButtonWrap from './components/ButtonWrap';
+import './App.css';
 
 function App() {
-    const [count, setCount] = useState(0)
-
     return (
-        <div></div>
-    )
+        <div className="app">
+            <DisplayContainer />
+            <ButtonWrap />
+        </div>
+    );
 }
 
-export default App
+export default App;
