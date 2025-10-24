@@ -5,7 +5,7 @@ import './styles/App.scss';
 
 function App() {
     const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
-    const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const [weatherData, setWeatherData] = useState(null);
 
