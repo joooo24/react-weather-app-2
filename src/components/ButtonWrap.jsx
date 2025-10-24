@@ -1,13 +1,13 @@
 import React from 'react';
 import '../styles/ButtonWrap.scss';
 
-function ButtonWrap({ selectedCity = "current" }) {
+function ButtonWrap({ selectedCity, onCitySelect }) {
     const cities = [
         { id: 'current', name: '현재 위치' },
-        { id: 'hanoi', name: '하노이' },
-        { id: 'paris', name: '파리' },
-        { id: 'new-york', name: '뉴욕' },
-        { id: 'seoul', name: '서울' }
+        { id: 'Hanoi', name: '하노이' },
+        { id: 'Paris', name: '파리' },
+        { id: 'New York', name: '뉴욕' },
+        { id: 'Seoul', name: '서울' }
     ];
 
     return (
@@ -16,6 +16,7 @@ function ButtonWrap({ selectedCity = "current" }) {
                 <button
                     key={city.id}
                     className={`btn-city ${selectedCity === city.id ? 'active' : ''}`}
+                    onClick={() => onCitySelect(city.id)}
                 >
                     {city.name}
                 </button>

@@ -36,15 +36,25 @@ function App() {
         let data = await response.json();
         setWeatherData(data);
     };
-    
+
+    // 4. 도시 선택 핸들러 함수
+    const selectCity = (cityId) => {
+        if (cityId === 'current') {
+            getCurrentLocation();
+        } else {
+            getWeatherByCity(cityId);
+        }
+    };
+
     // 컴포넌트 마운트 시 현재 위치 날씨 로드
     useEffect(() => {
         getCurrentLocation();
     }, []);
+
     return (
         <div className="app">
             <DisplayContainer weatherData={weatherData} />
-            <ButtonWrap />
+            <ButtonWrap onCitySelect={selectCity} />
         </div>
     );
 }
