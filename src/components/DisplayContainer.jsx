@@ -1,15 +1,36 @@
 import React from 'react';
+import '../styles/DisplayContainer.scss';
 
-function DisplayContainer({ city, temperature, unit, fahrenheit, condition }) {
+function DisplayContainer({ weatherData }) {
+    if (!weatherData) {
+        return (
+            <div className="display-container">
+                <div className="display-wrap">
+                    <p className='no-contents'>날씨 데이터가 없습니다</p>
+                </div>
+            </div>
+        );
+    }
+
+    // 온도 변환 함수
+    const celsiusToFahrenheit = (celsius) => {
+        return Math.round((celsius * 9 / 5) + 32);
+    };
+
+    const temperature = Math.round(weatherData.main.temp);
+    const fahrenheit = celsiusToFahrenheit(temperature);
+    const cityName = weatherData.name;
+    const condition = weatherData.weather[0].description;
+
     return (
         <div className="display-container">
             <div className="display-wrap">
-                <h2 className="city-name">{city}</h2>
+                <h2 className="city-name">{cityName}</h2>
                 <div className="temperature">
-                    <span className="celsius">{temperature} {unit}</span>
+                    <span className="celsius">{temperature} °C</span>
                     <span className="fahrenheit">/ {fahrenheit} °F</span>
                 </div>
-                <h3 className="weather-condition">{condition}</h3>
+                <p className="weather-condition">{condition}</p>
             </div>
         </div>
     );

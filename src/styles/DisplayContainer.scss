@@ -1,0 +1,48 @@
+.display-container {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    .display-wrap {
+        text-align: center;
+        color: white;
+
+        .city-name {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .temperature {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+            .celsius {
+                color: white;
+            }
+
+            .fahrenheit {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 32px;
+            }
+        }
+
+        .weather-condition {
+            font-size: 18px;
+            margin: 15px 0 0 0;
+            text-transform: capitalize;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .no-contents {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+    }
+}
