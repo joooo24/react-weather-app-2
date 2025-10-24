@@ -6,6 +6,7 @@ import './styles/App.scss';
 function App() {
     const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
     const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+
     const [weatherData, setWeatherData] = useState(null);
 
     // 1. 현재 위치 가져오기 함수
@@ -26,6 +27,16 @@ function App() {
         let data = await response.json();
         setWeatherData(data);
     };
+
+    // 3. 도시명으로 날씨 가져오기 함수
+    const getWeatherByCity = async (cityName) => {
+        const response = await fetch(
+            `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+        );
+        let data = await response.json();
+        setWeatherData(data);
+    };
+    
     // 컴포넌트 마운트 시 현재 위치 날씨 로드
     useEffect(() => {
         getCurrentLocation();
