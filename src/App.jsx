@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import DisplayContainer from './components/DisplayContainer';
-import ButtonWrap from './components/ButtonWrap';
-import './styles/App.scss';
+import React, { useState, useEffect } from "react";
+import DisplayContainer from "./components/DisplayContainer";
+import ButtonWrap from "./components/ButtonWrap";
+import "./styles/App.scss";
 
 function App() {
     const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -13,7 +13,7 @@ function App() {
     // 1. 현재 위치 가져오기 함수
     const getCurrentLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
-            console.log("쭈 position", position)
+            console.log("쭈 position", position);
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
             getWeatherByCurrentLocation(lat, lon);
@@ -24,14 +24,12 @@ function App() {
     const getWeatherByCurrentLocation = async (lat, lon) => {
         setIsLoading(true);
         try {
-            const response = await fetch(
-                `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-            );
+            const response = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
             let data = await response.json();
             setWeatherData(data);
             setIsLoading(false);
         } catch (error) {
-            console.error('날씨 데이터를 가져오는 중 오류 발생:', error);
+            console.error("날씨 데이터를 가져오는 중 오류 발생:", error);
             setIsLoading(false);
         }
     };
@@ -40,21 +38,19 @@ function App() {
     const getWeatherByCity = async (cityName) => {
         setIsLoading(true);
         try {
-            const response = await fetch(
-                `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`
-            );
+            const response = await fetch(`${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`);
             let data = await response.json();
             setWeatherData(data);
             setIsLoading(false);
         } catch (error) {
-            console.error('날씨 데이터를 가져오는 중 오류 발생:', error);
+            console.error("날씨 데이터를 가져오는 중 오류 발생:", error);
             setIsLoading(false);
         }
     };
 
     // 4. 도시 선택 핸들러 함수
     const selectCity = (cityId) => {
-        if (cityId === 'current') {
+        if (cityId === "current") {
             getCurrentLocation();
         } else {
             getWeatherByCity(cityId);
@@ -68,8 +64,10 @@ function App() {
 
     return (
         <div className="app">
-            <DisplayContainer weatherData={weatherData} isLoading={isLoading} />
-            <ButtonWrap onCitySelect={selectCity} />
+            <div className="weather-wrap">
+                <DisplayContainer weatherData={weatherData} isLoading={isLoading} />
+                <ButtonWrap onCitySelect={selectCity} />
+            </div>
         </div>
     );
 }
