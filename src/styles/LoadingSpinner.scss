@@ -1,0 +1,45 @@
+// 색상 변수 정의
+$primary-color: #3498db;
+$text-color: #666;
+$border-color: #f3f3f3;
+
+// 믹스인 정의
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// 애니메이션 정의
+@keyframes spin {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+
+// 로딩 컨테이너
+.loading-container {
+  @include flex-center-column;
+  height: 300px;
+  gap: 20px;
+  
+  p {
+    color: $text-color;
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+// 스피너
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid $border-color;
+  border-top: 4px solid $primary-color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
