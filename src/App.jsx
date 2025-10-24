@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import DisplayContainer from './components/DisplayContainer';
 import ButtonWrap from './components/ButtonWrap';
-import './App.css';
+import './styles/App.scss';
 
 function App() {
+    const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+    const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+    const [weatherData, setWeatherData] = useState(null);
+
+    // 1. 현재 위치 가져오기 함수
+    const getCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log("쭈 position", position)
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            getWeatherByCurrentLocation(lat, lon);
+        });
+    };
+
+    // 2. 현재 위치로 날씨 가져오기 함수
+    const getWeatherByCurrentLocation = async (lat, lon) => {
+        const response = await fetch(
+            `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+        );
+        let data = await response.json();
+        setWeatherData(data);
+    };
+    // 컴포넌트 마운트 시 현재 위치 날씨 로드
+    useEffect(() => {
+        getCurrentLocation();
+    }, []);
     return (
         <div className="app">
-            <DisplayContainer />
+            <DisplayContainer weatherData={weatherData} />
             <ButtonWrap />
         </div>
     );

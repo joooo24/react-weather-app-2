@@ -1,0 +1,59 @@
+// 색상 변수 정의
+$primary-color: #3498db;
+$primary-hover: #2980b9;
+$error-color: #e74c3c;
+$text-color: #666;
+$border-color: #f3f3f3;
+
+// 믹스인 정의
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin button-style {
+    padding: 10px 20px;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $primary-hover;
+    }
+}
+
+// 메인 스타일
+.app {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.error-message {
+    text-align: center;
+    padding: 40px;
+    color: $error-color;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    button {
+        margin-top: 20px;
+        @include button-style;
+    }
+}
+
+.weather-details {
+    margin-top: 20px;
+    font-size: 14px;
+    color: $text-color;
+
+    p {
+        margin: 5px 0;
+    }
+}
