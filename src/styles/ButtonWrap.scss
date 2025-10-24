@@ -1,0 +1,26 @@
+.btn-wrap {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    .btn-city {
+        padding: 10px 20px;
+        border: 2px solid #ddd;
+        background-color: white;
+        color: #333;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover,
+        &.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+    }
+}
