@@ -1,7 +1,19 @@
 import React from 'react';
+import LoadingSpinner from './LoadingSpinner';
 import '../styles/DisplayContainer.scss';
 
-function DisplayContainer({ weatherData }) {
+function DisplayContainer({ weatherData, isLoading }) {
+    // 로딩 중일 때 로딩 스피너 표시
+    if (isLoading) {
+        return (
+            <div className="display-container">
+                <div className="display-wrap">
+                    <LoadingSpinner />
+                </div>
+            </div>
+        );
+    }
+
     if (!weatherData) {
         return (
             <div className="display-container">

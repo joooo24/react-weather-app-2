@@ -8,6 +8,7 @@ function App() {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const [weatherData, setWeatherData] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     // 1. 현재 위치 가져오기 함수
     const getCurrentLocation = () => {
@@ -21,20 +22,34 @@ function App() {
 
     // 2. 현재 위치로 날씨 가져오기 함수
     const getWeatherByCurrentLocation = async (lat, lon) => {
-        const response = await fetch(
-            `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-        );
-        let data = await response.json();
-        setWeatherData(data);
+        setIsLoading(true);
+        try {
+            const response = await fetch(
+                `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+            );
+            let data = await response.json();
+            setWeatherData(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error('날씨 데이터를 가져오는 중 오류 발생:', error);
+            setIsLoading(false);
+        }
     };
 
     // 3. 도시명으로 날씨 가져오기 함수
     const getWeatherByCity = async (cityName) => {
-        const response = await fetch(
-            `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`
-        );
-        let data = await response.json();
-        setWeatherData(data);
+        setIsLoading(true);
+        try {
+            const response = await fetch(
+                `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+            );
+            let data = await response.json();
+            setWeatherData(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error('날씨 데이터를 가져오는 중 오류 발생:', error);
+            setIsLoading(false);
+        }
     };
 
     // 4. 도시 선택 핸들러 함수
@@ -53,7 +68,7 @@ function App() {
 
     return (
         <div className="app">
-            <DisplayContainer weatherData={weatherData} />
+            <DisplayContainer weatherData={weatherData} isLoading={isLoading} />
             <ButtonWrap onCitySelect={selectCity} />
         </div>
     );
