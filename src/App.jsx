@@ -9,6 +9,7 @@ function App() {
 
     const [weatherData, setWeatherData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [selectedCity, setSelectedCity] = useState("current");
 
     // 1. 현재 위치 가져오기 함수
     const getCurrentLocation = () => {
@@ -50,6 +51,7 @@ function App() {
 
     // 4. 도시 선택 핸들러 함수
     const selectCity = (cityId) => {
+        setSelectedCity(cityId);
         if (cityId === "current") {
             getCurrentLocation();
         } else {
@@ -66,7 +68,7 @@ function App() {
         <div className="app">
             <div className="weather-wrap">
                 <DisplayContainer weatherData={weatherData} isLoading={isLoading} />
-                <ButtonWrap onCitySelect={selectCity} />
+                <ButtonWrap selectedCity={selectedCity} onCitySelect={selectCity} />
             </div>
         </div>
     );
